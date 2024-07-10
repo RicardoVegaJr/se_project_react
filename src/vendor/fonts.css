@@ -1,0 +1,9 @@
+@font-face {
+  font-family: "CabinetGrotesk-Regular";
+  src: url("../assets/Fonts/CabinetGrotesk-Regular.woff2") format("woff2"),
+    url("../assets/Fonts/CabinetGrotesk-Regular.woff") format("woff"),
+    url("../assets/Fonts/CabinetGrotesk-Regular.ttf") format("truetype");
+  font-weight: 400;
+  font-display: swap;
+  font-style: normal;
+}
