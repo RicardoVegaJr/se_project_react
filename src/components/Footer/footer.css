@@ -1,0 +1,11 @@
+.footer {
+  font-family: CabinetGrotesk-Regular;
+  font-weight: 500px;
+  color: #000000;
+  size: 16px;
+  line-height: 20px;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  justify-content: space-between;
+}
