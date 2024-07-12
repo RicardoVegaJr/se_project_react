@@ -22,4 +22,5 @@
   object-fit: cover;
   width: 100%;
   object-position: right top;
+  margin: 0;
 }

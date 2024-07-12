@@ -1,4 +1,6 @@
 .cards {
+  font-family: CabinetGrotesk-Regular;
+  font-weight: 700;
 }
 
 .card__container {
@@ -19,15 +21,17 @@
 
 .card__title {
   color: #00000099;
-  font-family: CabinetGrotesk-Regular;
   font-size: 16px;
   padding: 0;
   margin: 0;
-  font-weight: 700;
   line-height: 20px;
 }
 
 .cards__text {
+  font-size: 20px;
+  line-height: 24.8px;
+  margin-top: 40px;
+  margin-bottom: 34px;
 }
 
 .card__image {
