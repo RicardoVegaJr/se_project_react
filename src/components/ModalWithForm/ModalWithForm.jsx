@@ -1,27 +1,65 @@
 import "./ModalWithForm.css";
+import modalClose from "../../assets/modalClose.svg";
 
 function ModalWithForm() {
   return (
     <div className="modal">
       <div className="modal__container">
+        <img
+          src={modalClose}
+          class="modal__close"
+          id="modalFormClose"
+          type="button"
+        />
         <form action="" className="modal__form">
           <h1 className="modal__form-title">New garment</h1>
-          <label>Name</label>
-          <input placeholder="Name"></input>
-          <label>Image</label>
-          <input placeholder="URL"></input>
+          <h1 className="modal__form-input-title">Name</h1>
+          <input
+            className="modal__form-input"
+            id="name"
+            name="name"
+            placeholder="Name"
+            minlength="2"
+            maxlength="20"
+            required
+          ></input>
+          <h1 className="modal__form-input-title">Image</h1>
+          <input
+            className="modal__form-input"
+            id="URL"
+            name="URL"
+            type="text"
+            placeholder="Image URL"
+            minlength="6"
+            maxlength="40"
+            required
+          ></input>
           <div className="modal__form-selectors">
-            <label>Select the weather type:</label>
+            <h1 className="modal__form-radio-title">
+              Select the weather type:
+            </h1>
             <div>
-              <input type="radio" id="hot"></input>
+              <input
+                type="radio"
+                id="hot"
+                className="modal__form-radio"
+              ></input>
               <label for="hot">Hot</label>
             </div>
             <div>
-              <input type="radio" id="warm"></input>
+              <input
+                type="radio"
+                id="warm"
+                className="modal__form-radio"
+              ></input>
               <label for="Warm">Warm</label>
             </div>
             <div>
-              <input type="radio" id="Cold"></input>
+              <input
+                type="radio"
+                id="Cold"
+                className="modal__form-radio"
+              ></input>
               <label for="cold">Cold</label>
             </div>
           </div>
