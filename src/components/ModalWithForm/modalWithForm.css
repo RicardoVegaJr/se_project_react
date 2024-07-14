@@ -8,13 +8,16 @@
   justify-content: center;
   align-items: center;
   background-color: rgba(0, 0, 0, 0.5);
-  /* visibility: hidden; */
+  visibility: hidden;
   pointer-events: none;
   /* opacity: 0; */
   /* transition: visibility 0s linear 0.3s, opacity 0.3s linear; */
   display: flex;
   margin: 0;
   padding: 0;
+}
+.modal_opened {
+  visibility: visible;
 }
 
 .modal__container {
