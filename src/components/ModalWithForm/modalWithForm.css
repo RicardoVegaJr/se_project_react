@@ -39,6 +39,8 @@
   position: absolute;
   top: 22px;
   right: 30px;
+  background-image: url(../../assets/modalClose.svg);
+  border: none;
 }
 
 .modal__form {
