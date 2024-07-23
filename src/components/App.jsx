@@ -7,7 +7,7 @@ import ModalWithForm from "./ModalWithForm/ModalWithForm";
 import ItemModal from "./ItemModal/ItemModal";
 
 function App() {
-  const [weatherData, setWeatherData] = useState({ type: "hot" });
+  const [weatherData, setWeatherData] = useState({ type: "cold" });
   const [activeModal, setActiveModal] = useState("");
   const [selectedCard, setSelectedCard] = useState({});
 

@@ -14,10 +14,15 @@
 .header__date-and-location {
   margin: 0;
   line-height: 24px;
+  
 }
 .header__add-clothes-btn {
   margin-left: auto;
   margin-right: 20px;
+  font-family: CabinetGrotesk-Regular;
+  font-weight: 700;
+  font-size: 20px;
+  border: none;
 }
 .header_user-container {
   display: flex;
