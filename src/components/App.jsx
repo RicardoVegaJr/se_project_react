@@ -1,11 +1,11 @@
 import { useEffect, useState } from "react";
-import "./app.css";
+import "./App.css";
 import { coordinates, APIkey } from "../utils/constants";
 import Header from "./Header/header";
 import Main from "./Main/main";
 import Footer from "./Footer/footer";
-import ModalWithForm from "./ModalWithForm/modalWithForm";
-import ItemModal from "./ItemModal/itemModal";
+import ModalWithForm from "./ModalWithForm/ModalWithForm";
+import ItemModal from "./ItemModal/ItemModal";
 import { getWeather } from "../utils/weatherApi";
 import { filterweatherData } from "../utils/weatherApi";
 
