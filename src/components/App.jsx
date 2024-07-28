@@ -10,9 +10,15 @@ import { getWeather } from "../utils/weatherApi";
 import { filterweatherData } from "../utils/weatherApi";
 
 function App() {
-  const [weatherData, setWeatherData] = useState({ type: "",  temp:{F:999, C:999}, city:""});
+  const [weatherData, setWeatherData] = useState({
+    type: "",
+    temp: { F: 999, C: 999 },
+    city: "",
+  });
   const [activeModal, setActiveModal] = useState("");
   const [selectedCard, setSelectedCard] = useState({});
+
+  
 
   const handleCardClick = (card) => {
     setActiveModal("preview");
@@ -26,28 +32,31 @@ function App() {
     setActiveModal("");
   };
 
-
-
-useEffect(() => {
-getWeather(coordinates, APIkey).then((data) => {const filteredData = filterweatherData(data);
-  setWeatherData(filteredData);
-}).catch(console.error);
-}, []);
+  useEffect(() => {
+    getWeather(coordinates, APIkey)
+      .then((data) => {
+        const filteredData = filterweatherData(data);
+        setWeatherData(filteredData);
+      })
+      .catch(console.error);
+  }, []);
 
   return (
     <div className="page">
       <div className="page__content">
         <Header handleAddClick={handleAddClick} weatherData={weatherData} />
-        <Main weatherData={weatherData} handleCardClick={handleCardClick}/>
+        <Main weatherData={weatherData} handleCardClick={handleCardClick} />
         <Footer />
       </div>
       <ModalWithForm
         title="New garment"
         buttonText="Add garment"
-        activeModal={activeModal}
         onClose={closeActiveModal}
+        isOpen={activeModal === "add-garment"}
       >
-        <h1 className="modal__form-input-title">Name</h1>
+        <label className="modal__form-input-title" htmlFor="name">
+          Name
+        </label>
         <input
           className="modal__form-input"
           id="name"
@@ -55,7 +64,9 @@ getWeather(coordinates, APIkey).then((data) => {const filteredData = filterweath
           placeholder="Name"
           required
         ></input>
-        <h1 className="modal__form-input-title">Image</h1>
+        <label className="modal__form-input-title" htmlFor="URL">
+          Image
+        </label>
         <input
           className="modal__form-input"
           id="URL"
@@ -65,22 +76,43 @@ getWeather(coordinates, APIkey).then((data) => {const filteredData = filterweath
           required
         ></input>
         <div className="modal__form-selectors">
-          <h1 className="modal__form-radio-title">Select the weather type:</h1>
+          <label className="modal__form-radio-title" htmlFor="type">
+            Select the weather type:
+          </label>
           <div>
-            <input type="radio" id="hot" className="modal__form-radio"></input>
+            <input
+              type="radio"
+              id="hot"
+              className="modal__form-radio"
+              name="weatherSelector"
+            ></input>
             <label for="hot">Hot</label>
           </div>
           <div>
-            <input type="radio" id="warm" className="modal__form-radio"></input>
+            <input
+              type="radio"
+              id="warm"
+              className="modal__form-radio"
+              name="weatherSelector"
+            ></input>
             <label for="Warm">Warm</label>
           </div>
           <div>
-            <input type="radio" id="Cold" className="modal__form-radio"></input>
+            <input
+              type="radio"
+              id="Cold"
+              className="modal__form-radio"
+              name="weatherSelector"
+            ></input>
             <label for="cold">Cold</label>
           </div>
         </div>
       </ModalWithForm>
-      <ItemModal activeModal={activeModal} card={selectedCard} onClose={closeActiveModal}/>
+      <ItemModal
+        card={selectedCard}
+        onClose={closeActiveModal}
+        isOpen={activeModal === "preview"}
+      />
     </div>
   );
 }
