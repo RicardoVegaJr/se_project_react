@@ -86,7 +86,7 @@ function App() {
               className="modal__form-radio"
               name="weatherSelector"
             ></input>
-            <label for="hot">Hot</label>
+            <label htmlFor="hot">Hot</label>
           </div>
           <div>
             <input
@@ -95,16 +95,16 @@ function App() {
               className="modal__form-radio"
               name="weatherSelector"
             ></input>
-            <label for="Warm">Warm</label>
+            <label htmlFor="warm">Warm</label>
           </div>
           <div>
             <input
               type="radio"
-              id="Cold"
+              id="cold"
               className="modal__form-radio"
               name="weatherSelector"
             ></input>
-            <label for="cold">Cold</label>
+            <label htmlFor="cold">Cold</label>
           </div>
         </div>
       </ModalWithForm>
