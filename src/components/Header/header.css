@@ -7,6 +7,11 @@
   font-weight: 700;
   font-size: 20px;
 }
+/* .header__switch-wrapper{
+  display: flex;
+
+} */
+
 .header__logo {
   margin-right: 24px;
 }
