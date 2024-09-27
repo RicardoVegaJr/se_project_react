@@ -8,10 +8,10 @@ console.log(weatherData);
 const currentDate = new Date().toLocaleString('default', { month: 'long', day: 'numeric' });
 
   return (
-    <header className="header">.
+    <header className="header">
       <img src={logo} alt="logo" className="header__logo" />
       <p className="header__date-and-location">{currentDate}, {weatherData.city}</p>
-      
+      <div className="header__switch-wrapper">
       <ToggleSwitch/>
       <button
         onClick={handleAddClick}
@@ -20,7 +20,7 @@ const currentDate = new Date().toLocaleString('default', { month: 'long', day: '
       >
         + Add Clothes
       </button>
-      
+      </div>
       <div className="header_user-container">
         <p className="header__username">Terrence Tegegne</p>
         <img src={avatar} alt="Terrenece Tegegne" className="header__avatar" />

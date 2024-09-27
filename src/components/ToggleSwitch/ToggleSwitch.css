@@ -1,6 +1,14 @@
 .switch{
-    display:flex;
-    position: relative;
+display:flex;
+position: relative;
+align-items: center;
+font-family: Cabinet Grotesk;
+font-size: 14px;
+font-weight: 700;
+line-height: 17.36px;
+
+
+    
 }
 
 .switch__box{
@@ -21,13 +29,31 @@
     text-align: center;
     cursor: pointer;
     position:absolute;
+    transition: left 0.3s ease, background-color 0.3s ease;
 }
 
 .switch__slider-F{
-top:3px;
-left:28px;
+left:2px;
+
 }
 .switch__slider-C{
-top:3px;
-left:5px;
+left:18px;
+
+}
+
+.switch__temp-F{
+position: absolute;
+left: 11px;
+opacity: .5;
+}
+
+.switch__temp-C{
+position: absolute;
+left: 30px;
+opacity: .5;
+color: black;
+}
+.switch__active{
+color:white;
+opacity: 1;
 }

@@ -1,16 +1,19 @@
 .header {
   display: flex;
-  justify-content: space-between;
   align-items: center;
+  justify-content: space-between;
   padding: 32px 0 28px;
   font-family: CabinetGrotesk-Regular;
   font-weight: 700;
   font-size: 20px;
+  
 }
-/* .header__switch-wrapper{
+.header__switch-wrapper{
   display: flex;
+  align-items: center;
+  margin-left:500px;
 
-} */
+}
 
 .header__logo {
   margin-right: 24px;
@@ -22,7 +25,7 @@
   
 }
 .header__add-clothes-btn {
-  margin-left: auto;
+  margin-left: 20px;
   margin-right: 20px;
   font-family: CabinetGrotesk-Regular;
   font-weight: 700;
@@ -36,4 +39,23 @@
 }
 .header__username {
   margin: 0;
+}
+
+
+@media screen and (max-width: 1150px) {
+  .header__switch-wrapper{
+    display: flex;
+    align-items: center;
+    margin-left:100px;
+  
+  }
+}
+
+@media screen and (max-width: 840px) {
+  .header__switch-wrapper{
+    display: flex;
+    align-items: center;
+    margin-left:30px;
+  
+  }
 }
