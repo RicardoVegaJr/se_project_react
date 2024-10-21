@@ -3,10 +3,10 @@ import { defaultClothingItems } from "../../utils/constants";
 import ItemCard from "../ItemCard/itemCard";
 import "./main.css";
 
-function Main({ weatherData, handleCardClick }) {
+function Main({ currentTemp, weatherData, handleCardClick }) {
 
-//   const {currentTemperatureUnit} = useContext(CurrentTemperatureUnitContext);
-// console.log(currentTemperatureUnit);
+  // const {currentTemperatureUnit} = useContext(CurrentTemperatureUnitContext);
+
 
 //   const weatherType = useMemo(() => {
 //     if (weatherTemp >= 86 ) {
@@ -22,9 +22,9 @@ function Main({ weatherData, handleCardClick }) {
   return (
     <main>
       {console.log(weatherData.type)}
-      <WeatherCard weatherData={weatherData}  />
+      <WeatherCard currentTemp={currentTemp} weatherData={weatherData}  />
       <section className="cards">
-        <p className="cards__text">{`Today is ${weatherData.temp.f}° F / You may want to wear:`}</p>
+        <p className="cards__text">{`Today is ${weatherData.temp.f} ${currentTemp} / You may want to wear:`}</p>
         <ul className="cards__list">
           {defaultClothingItems
             .filter((item) => {
