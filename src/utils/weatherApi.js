@@ -13,9 +13,15 @@ export const getWeather = ({ latitude, longitude }, APIkey) => {
 export const filterweatherData = (data) => {
   const result = {};
   result.city = data.name;
-  result.temp = { f: data.main.temp };
+  result.temp = { f: data.main.temp, c: Math.round((data.main.temp - 32) * 5/9) };
   result.type = getWeatherType(result.temp.F);
+  console.log(result);
   return result;
+  // const main = data.main;
+  // const temperature = main && main.temp;
+  // const weather = {temperature: {F: Math.round(temperature), C: Math.round((temperature - 32) * 5/9)}}
+  // console.log(weather);
+  // return Math.ceil(temperature);
 };
 
 const getWeatherType = (temperature) => {
@@ -27,3 +33,6 @@ const getWeatherType = (temperature) => {
     return "cold";
   }
 };
+
+// weather.temperature.F = data.main.temp;
+// weather.temperature.C = Math.round((data.main.temp - 32) * 5/9);

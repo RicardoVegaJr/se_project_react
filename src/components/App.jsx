@@ -44,6 +44,7 @@ function App() {
     getWeather(coordinates, APIkey)
       .then((data) => {
         const filteredData = filterweatherData(data);
+        console.log(filteredData);
         setWeatherData(filteredData);
       })
       .catch(console.error);
