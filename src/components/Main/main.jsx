@@ -24,7 +24,7 @@ function Main({ currentTemp, weatherData, handleCardClick }) {
       {console.log(weatherData.type)}
       <WeatherCard currentTemp={currentTemp} weatherData={weatherData}  />
       <section className="cards">
-        <p className="cards__text">{`Today is ${weatherData.temp.f} ${currentTemp} / You may want to wear:`}</p>
+        <p className="cards__text">{`Today is ${weatherData.temp[currentTemp.toLowerCase()]} º${currentTemp} / You may want to wear:`}</p>
         <ul className="cards__list">
           {defaultClothingItems
             .filter((item) => {
