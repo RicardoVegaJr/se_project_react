@@ -1,14 +1,33 @@
-import React from "react"
+import React, {useState} from "react"
 import ModalWithForm from "./components/ModalWithForm/ModalWithForm"
 
 const AddItemModal = ({closeActiveModal, onAddItem, isOpen}) => {
+
+  const[name, setName] = useState("");
+  const handleNameChange = (e) => {
+    console.log(e.target.value);
+    setName(e.target.value);
+  };
+
+  const[link, setUrl] = useState("");
+  const handleUrlChange = (e) => {
+    console.log(e.target.value);
+    setUrl(e.target.value);
+  }
+
+const handleSubmit = (e) =>{
+  e.preventDefault();
+  onAddItem({name, link});
+
+}
+
     return(
         <ModalWithForm
         title="New garment"
         buttonText="Add garment"
         onClose={closeActiveModal}
         isOpen={isOpen}
-        onSubmit={onAddItem}
+        onSubmit={handleSubmit}
       >
         <label className="modal__form-input-title" htmlFor="name">
           Name
@@ -19,6 +38,8 @@ const AddItemModal = ({closeActiveModal, onAddItem, isOpen}) => {
           name="name"
           placeholder="Name"
           required
+          value={name}
+          onChange={handleNameChange}
         ></input>
         <label className="modal__form-input-title" htmlFor="URL">
           Image
@@ -30,6 +51,7 @@ const AddItemModal = ({closeActiveModal, onAddItem, isOpen}) => {
           type="text"
           placeholder="Image URL"
           required
+          onChange={handleUrlChange}
         ></input>
         <div className="modal__form-selectors">
           <label className="modal__form-radio-title" htmlFor="type">
