@@ -11,6 +11,7 @@ import { getWeather } from "../utils/weatherApi";
 import { filterweatherData } from "../utils/weatherApi";
 import {CurrentTemperatureUnitContext} from "../contexts/CurrentTemperatureUnitContext";
 import AddItemModal from "../AddItemModal";
+import Profile from "./Profile/Profile";
 
 function App() {
   const [weatherData, setWeatherData] = useState({
@@ -62,7 +63,7 @@ console.log(currentTemperatureUnit);
         <Header handleAddClick={handleAddClick} weatherData={weatherData} />
         <Routes>
           <Route path="/" element={<Main currentTemp={currentTemperatureUnit} weatherData={weatherData} handleCardClick={handleCardClick} />} />
-          <Route path="/profile" element={<p>PROFILE</p>} />
+          <Route path="/profile" element={<Profile/>} />
         </Routes>
         <Footer />
       </div>
