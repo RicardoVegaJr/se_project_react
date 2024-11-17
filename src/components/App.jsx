@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import { Routes, Route } from "react-router-dom";
 import "./App.css";
 import { coordinates, APIkey } from "../utils/constants";
 import Header from "./Header/header";
@@ -59,7 +60,10 @@ console.log(currentTemperatureUnit);
       <CurrentTemperatureUnitContext.Provider value={{currentTemperatureUnit, handleToggleSwitchChange}}>
       <div className="page__content">
         <Header handleAddClick={handleAddClick} weatherData={weatherData} />
-        <Main currentTemp={currentTemperatureUnit} weatherData={weatherData} handleCardClick={handleCardClick} />
+        <Routes>
+          <Route path="/" element={<Main currentTemp={currentTemperatureUnit} weatherData={weatherData} handleCardClick={handleCardClick} />} />
+          <Route path="/profile" element={<p>PROFILE</p>} />
+        </Routes>
         <Footer />
       </div>
       {activeModal === "add-garment" && <AddItemModal closeActiveModal={closeActiveModal} isOpen={activeModal === "add-garment"} onAddItem={onAddItem}/>}
