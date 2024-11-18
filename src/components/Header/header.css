@@ -32,6 +32,11 @@
   font-size: 20px;
   border: none;
 }
+
+.header__link{
+  text-decoration: none;
+  color: black;
+}
 .header_user-container {
   display: flex;
   align-items: center;
