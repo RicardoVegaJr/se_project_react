@@ -12,6 +12,7 @@ import { filterweatherData } from "../utils/weatherApi";
 import {CurrentTemperatureUnitContext} from "../contexts/CurrentTemperatureUnitContext";
 import AddItemModal from "../AddItemModal";
 import Profile from "./Profile/Profile";
+import { getItems } from "../utils/api";
 
 function App() {
   const [weatherData, setWeatherData] = useState({
@@ -22,6 +23,7 @@ function App() {
   const [activeModal, setActiveModal] = useState("");
   const [selectedCard, setSelectedCard] = useState({});
   const [currentTemperatureUnit, setCurrentTemperatureUnit] = useState('F');
+  const [clothingItems, setClothingItems] = useState([]);
 
 
   const handleCardClick = (card) => {
@@ -55,6 +57,13 @@ function App() {
       })
       .catch(console.error);
   }, []);
+
+  useEffect(() => {
+    getItems().then((data) => {
+      setClothingItems(data)
+    }).catch(console.error);
+  }, []);
+
 console.log(currentTemperatureUnit);
   return (
     <div className="page">
@@ -62,8 +71,10 @@ console.log(currentTemperatureUnit);
       <div className="page__content">
         <Header handleAddClick={handleAddClick} weatherData={weatherData} />
         <Routes>
-          <Route path="/" element={<Main currentTemp={currentTemperatureUnit} weatherData={weatherData} handleCardClick={handleCardClick} />} />
-          <Route path="/profile" element={<Profile handleCardClick={handleCardClick}/>} />
+          <Route path="/" element={
+            //pass clothing Items as prop
+              <Main clothingItems={clothingItems} currentTemp={currentTemperatureUnit} weatherData={weatherData} handleCardClick={handleCardClick} />} />
+          <Route path="/profile" element={<Profile clothingItems={clothingItems} handleCardClick={handleCardClick}/>} />
         </Routes>
         <Footer />
       </div>
