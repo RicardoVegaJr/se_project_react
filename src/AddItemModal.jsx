@@ -21,6 +21,7 @@ const handleSubmit = (e) =>{
 
 }
 
+
     return(
         <ModalWithForm
         title="New garment"
