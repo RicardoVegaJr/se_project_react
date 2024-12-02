@@ -38,9 +38,34 @@ function App() {
     setActiveModal("");
   };
 
+
+
   const onAddItem = (values) => {
-    console.log(values);
+    const newItem = { ...values, _id: Date.now().toString() };
+    fetch("http://localhost:3001/items", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(newItem),
+    })
+    .then((res) => {
+      if (res.ok) {
+        return res.json();
+      }
+      return Promise.reject(`Error: ${res.status}`); 
+    })
+    .then((data) => {
+      setClothingItems([newItem, ...clothingItems]); 
+      closeActiveModal();
+    })
+    .catch((error) => {
+      console.error(error);
+    });
   };
+
+
+
 
   const handleToggleSwitchChange = () => {
     if (currentTemperatureUnit === 'C') setCurrentTemperatureUnit('F')
