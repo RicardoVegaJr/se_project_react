@@ -1,7 +1,7 @@
 import ClothesSection from "../ClothesSection/ClothesSection";
 import SideBar from "../SideBar/SideBar";
 import "./Profile.css"
-import AddItemModal from "../../AddItemModal";
+import AddItemModal from "../AddItemModal";
 
 function Profile ({handleCardClick, clothingItems}) {
  return (
