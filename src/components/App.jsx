@@ -25,7 +25,6 @@ function App() {
   const [currentTemperatureUnit, setCurrentTemperatureUnit] = useState('F');
   const [clothingItems, setClothingItems] = useState([]);
 
-
   const handleCardClick = (card) => {
     setActiveModal("preview");
     setSelectedCard(card);
@@ -37,6 +36,41 @@ function App() {
   const closeActiveModal = () => {
     setActiveModal("");
   };
+
+  const deleteCard =() => {
+    const updatedClothingItems = clothingItems.filter(item => item._id !== selectedCard._id);
+    setClothingItems(updatedClothingItems);
+    console.log(selectedCard)
+
+  };
+  
+
+  const deleteItemCard = () => {
+   
+    fetch(`http://localhost:3001/items/${selectedCard._id}`, {
+      method: "DELETE",
+      headers: {
+        "Content-Type": "application/json",
+      },
+    })
+    .then((res) => {
+      if (res.ok) {
+        return res.json();
+      }
+      return Promise.reject(`Error: ${res.status}`); 
+    })
+    .then(() => {
+      deleteCard();
+      closeActiveModal();
+    })
+    .catch((error) => {
+      console.error(error);
+    });
+  };
+
+  
+
+
 
 
 
@@ -105,7 +139,7 @@ console.log(currentTemperatureUnit);
       </div>
       {activeModal === "add-garment" && <AddItemModal closeActiveModal={closeActiveModal} isOpen={activeModal === "add-garment"} onAddItem={onAddItem}/>}
       {activeModal === "preview" && 
-        <ItemModal card={selectedCard} onClose={closeActiveModal} isOpen={handleCardClick} />
+        <ItemModal card={selectedCard} onClose={closeActiveModal} isOpen={handleCardClick} deleteItemCard={deleteItemCard} />
       }
       </CurrentTemperatureUnitContext.Provider>
     </div>

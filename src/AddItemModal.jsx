@@ -17,7 +17,7 @@ const AddItemModal = ({closeActiveModal, onAddItem, isOpen}) => {
 
 const handleSubmit = (e) =>{
   e.preventDefault();
-  onAddItem({name, link});
+  onAddItem({name, imageUrl: link});
 
 }
 
