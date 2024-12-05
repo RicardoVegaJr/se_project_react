@@ -75,7 +75,7 @@ function App() {
 
 
   const onAddItem = (values) => {
-    const newItem = { ...values, _id: Date.now().toString() };
+    const newItem = { ...values, _id: Date.now().toString()};
     fetch("http://localhost:3001/items", {
       method: "POST",
       headers: {
@@ -90,7 +90,7 @@ function App() {
       return Promise.reject(`Error: ${res.status}`); 
     })
     .then((data) => {
-      setClothingItems([newItem, ...clothingItems]); 
+      setClothingItems([...clothingItems, newItem]); 
       closeActiveModal();
     })
     .catch((error) => {
@@ -131,13 +131,12 @@ console.log(currentTemperatureUnit);
         <Header handleAddClick={handleAddClick} weatherData={weatherData} />
         <Routes>
           <Route path="/" element={
-            //pass clothing Items as prop
               <Main clothingItems={clothingItems} currentTemp={currentTemperatureUnit} weatherData={weatherData} handleCardClick={handleCardClick} />} />
-          <Route path="/profile" element={<Profile clothingItems={clothingItems} handleCardClick={handleCardClick}/>} />
+          <Route path="/profile" element={<Profile handleAddClick={handleAddClick} clothingItems={clothingItems} handleCardClick={handleCardClick}/>} />
         </Routes>
         <Footer />
       </div>
-      {activeModal === "add-garment" && <AddItemModal closeActiveModal={closeActiveModal} isOpen={activeModal === "add-garment"} onAddItem={onAddItem}/>}
+      {activeModal === "add-garment" && <AddItemModal  closeActiveModal={closeActiveModal} isOpen={activeModal === "add-garment"} onAddItem={onAddItem}/>}
       {activeModal === "preview" && 
         <ItemModal card={selectedCard} onClose={closeActiveModal} isOpen={handleCardClick} deleteItemCard={deleteItemCard} />
       }

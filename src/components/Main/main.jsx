@@ -1,23 +1,8 @@
 import WeatherCard from "../WeatherCard/weatherCard";
-// import { defaultClothingItems } from "../../utils/constants";
 import ItemCard from "../ItemCard/itemCard";
 import "./main.css";
 
 function Main({ currentTemp, weatherData, handleCardClick, clothingItems }) {
-
-  // const {currentTemperatureUnit} = useContext(CurrentTemperatureUnitContext);
-
-
-//   const weatherType = useMemo(() => {
-//     if (weatherTemp >= 86 ) {
-//       return "hot";
-//     } else if (weatherTemp >= 66 && weatherTemp <=85) {
-//       return "warm";
-//     } else if (weatherTemp <= 65) {
-//       return "cold";
-//     }
-//   }, [weatherTemp]);
-
 
   return (
     <main>

@@ -1,16 +1,15 @@
 import ClothesSection from "../ClothesSection/ClothesSection";
 import SideBar from "../SideBar/SideBar";
 import "./Profile.css"
-import AddItemModal from "../AddItemModal";
 
-function Profile ({handleCardClick, clothingItems}) {
+function Profile ({handleCardClick, clothingItems, handleAddClick}) {
  return (
  <div className="profile">
  <section className="profile__sidebar">
     <SideBar/>
  </section>
  <section className="profile__clothing-item">
-    <ClothesSection clothingItems={clothingItems} handleCardClick={handleCardClick}/>
+    <ClothesSection handleAddClick={handleAddClick} clothingItems={clothingItems} handleCardClick={handleCardClick}/>
  </section>
  </div>
  );
