@@ -9,10 +9,12 @@ import ModalWithForm from "./ModalWithForm/ModalWithForm";
 import ItemModal from "./ItemModal/ItemModal";
 import { getWeather } from "../utils/weatherApi";
 import { filterweatherData } from "../utils/weatherApi";
-import {CurrentTemperatureUnitContext} from "../contexts/CurrentTemperatureUnitContext";
+import { CurrentTemperatureUnitContext } from "../contexts/CurrentTemperatureUnitContext";
 import AddItemModal from "./AddItemModal";
 import Profile from "./Profile/Profile";
 import { getItems } from "../utils/api";
+import { deleteItem } from "../utils/api";
+import { onAddItemCard } from "../utils/api";
 
 function App() {
   const [weatherData, setWeatherData] = useState({
@@ -22,7 +24,7 @@ function App() {
   });
   const [activeModal, setActiveModal] = useState("");
   const [selectedCard, setSelectedCard] = useState({});
-  const [currentTemperatureUnit, setCurrentTemperatureUnit] = useState('F');
+  const [currentTemperatureUnit, setCurrentTemperatureUnit] = useState("F");
   const [clothingItems, setClothingItems] = useState([]);
 
   const handleCardClick = (card) => {
@@ -37,74 +39,31 @@ function App() {
     setActiveModal("");
   };
 
-  const deleteCard =() => {
-    const updatedClothingItems = clothingItems.filter(item => item._id !== selectedCard._id);
+  const deleteCard = () => {
+    const updatedClothingItems = clothingItems.filter(
+      (item) => item._id !== selectedCard._id
+    );
     setClothingItems(updatedClothingItems);
-    console.log(selectedCard)
-
+    console.log(selectedCard);
   };
-  
 
   const deleteItemCard = () => {
-   
-    fetch(`http://localhost:3001/items/${selectedCard._id}`, {
-      method: "DELETE",
-      headers: {
-        "Content-Type": "application/json",
-      },
-    })
-    .then((res) => {
-      if (res.ok) {
-        return res.json();
-      }
-      return Promise.reject(`Error: ${res.status}`); 
-    })
-    .then(() => {
-      deleteCard();
-      closeActiveModal();
-    })
-    .catch((error) => {
-      console.error(error);
-    });
+    deleteItem(selectedCard._id);
+    deleteCard();
+    closeActiveModal();
   };
-
-  
-
-
-
-
 
   const onAddItem = (values) => {
-    const newItem = { ...values, _id: Date.now().toString()};
-    fetch("http://localhost:3001/items", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(newItem),
-    })
-    .then((res) => {
-      if (res.ok) {
-        return res.json();
-      }
-      return Promise.reject(`Error: ${res.status}`); 
-    })
-    .then((data) => {
-      setClothingItems([...clothingItems, newItem]); 
-      closeActiveModal();
-    })
-    .catch((error) => {
-      console.error(error);
-    });
+    const newItem = { ...values, _id: Date.now().toString() };
+    onAddItemCard(newItem);
+    setClothingItems([newItem, ...clothingItems]);
+    closeActiveModal();
   };
-
-
 
 
   const handleToggleSwitchChange = () => {
-    if (currentTemperatureUnit === 'C') setCurrentTemperatureUnit('F')
-    if (currentTemperatureUnit === 'F') setCurrentTemperatureUnit('C')
-      
+    if (currentTemperatureUnit === "C") setCurrentTemperatureUnit("F");
+    if (currentTemperatureUnit === "F") setCurrentTemperatureUnit("C");
   };
 
   useEffect(() => {
@@ -118,28 +77,61 @@ function App() {
   }, []);
 
   useEffect(() => {
-    getItems().then((data) => {
-      setClothingItems(data)
-    }).catch(console.error);
+    getItems()
+      .then((data) => {
+        setClothingItems(data);
+      })
+      .catch(console.error);
   }, []);
 
-console.log(currentTemperatureUnit);
+  console.log(currentTemperatureUnit);
   return (
     <div className="page">
-      <CurrentTemperatureUnitContext.Provider value={{currentTemperatureUnit, handleToggleSwitchChange}}>
-      <div className="page__content">
-        <Header handleAddClick={handleAddClick} weatherData={weatherData} />
-        <Routes>
-          <Route path="/" element={
-              <Main clothingItems={clothingItems} currentTemp={currentTemperatureUnit} weatherData={weatherData} handleCardClick={handleCardClick} />} />
-          <Route path="/profile" element={<Profile handleAddClick={handleAddClick} clothingItems={clothingItems} handleCardClick={handleCardClick}/>} />
-        </Routes>
-        <Footer />
-      </div>
-      {activeModal === "add-garment" && <AddItemModal  closeActiveModal={closeActiveModal} isOpen={activeModal === "add-garment"} onAddItem={onAddItem}/>}
-      {activeModal === "preview" && 
-        <ItemModal card={selectedCard} onClose={closeActiveModal} isOpen={handleCardClick} deleteItemCard={deleteItemCard} />
-      }
+      <CurrentTemperatureUnitContext.Provider
+        value={{ currentTemperatureUnit, handleToggleSwitchChange }}
+      >
+        <div className="page__content">
+          <Header handleAddClick={handleAddClick} weatherData={weatherData} />
+          <Routes>
+            <Route
+              path="/"
+              element={
+                <Main
+                  clothingItems={clothingItems}
+                  currentTemp={currentTemperatureUnit}
+                  weatherData={weatherData}
+                  handleCardClick={handleCardClick}
+                />
+              }
+            />
+            <Route
+              path="/profile"
+              element={
+                <Profile
+                  handleAddClick={handleAddClick}
+                  clothingItems={clothingItems}
+                  handleCardClick={handleCardClick}
+                />
+              }
+            />
+          </Routes>
+          <Footer />
+        </div>
+        {activeModal === "add-garment" && (
+          <AddItemModal
+            closeActiveModal={closeActiveModal}
+            isOpen={activeModal === "add-garment"}
+            onAddItem={onAddItem}
+          />
+        )}
+        {activeModal === "preview" && (
+          <ItemModal
+            card={selectedCard}
+            onClose={closeActiveModal}
+            isOpen={handleCardClick}
+            deleteItemCard={deleteItemCard}
+          />
+        )}
       </CurrentTemperatureUnitContext.Provider>
     </div>
   );
