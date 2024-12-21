@@ -55,8 +55,9 @@ function App() {
 
   const onAddItem = (values) => {
     const newItem = { ...values, _id: Date.now().toString() };
-    onAddItemCard(newItem);
+    
     setClothingItems([newItem, ...clothingItems]);
+    onAddItemCard(newItem);
     closeActiveModal();
   };
 
@@ -79,7 +80,7 @@ function App() {
   useEffect(() => {
     getItems()
       .then((data) => {
-        setClothingItems(data);
+        setClothingItems(data.reverse());
       })
       .catch(console.error);
   }, []);
