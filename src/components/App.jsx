@@ -47,18 +47,28 @@ function App() {
     console.log(selectedCard);
   };
 
+ 
+
   const deleteItemCard = () => {
-    deleteItem(selectedCard._id);
-    deleteCard();
-    closeActiveModal();
-  };
+      deleteItem(selectedCard._id).then(()=> {
+      deleteCard();
+      closeActiveModal();
+    }).catch((error) => {
+      console.log(error)
+    });
+};
+
 
   const onAddItem = (values) => {
     const newItem = { ...values, _id: Date.now().toString() };
-    
-    setClothingItems([newItem, ...clothingItems]);
-    onAddItemCard(newItem);
-    closeActiveModal();
+    setClothingItems([newItem, ...clothingItems])
+
+    onAddItemCard(newItem)
+    .then(() => {
+      closeActiveModal();
+    }).catch((error) => {
+      console.log(error)
+    });
   };
 
 
@@ -139,3 +149,4 @@ function App() {
 }
 
 export default App;
+

@@ -13,7 +13,7 @@ function checkResponse(res) {
 }
 
 const deleteItem = (id) => {
-  fetch(`${baseUrl}/items/${id}`, {
+  return fetch(`${baseUrl}/items/${id}`, {
     method: "DELETE",
     headers: {
       "Content-Type": "application/json",
@@ -22,27 +22,17 @@ const deleteItem = (id) => {
     .then((res) => {
       checkResponse(res);
     })
-    .catch((error) => {
-      console.error(error);
-    });
 };
 
 const onAddItemCard = (newItem) => {
-  fetch(`${baseUrl}/items`, {
+  return fetch(`${baseUrl}/items`, {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
     },
     body: JSON.stringify(newItem),
   })
-    .then((res) => {
-      checkResponse(res);
-    })
-    .catch((error) => {
-      console.error(error);
-    });
+    .then((res) => checkResponse(res))
 };
 
-export { getItems };
-export { deleteItem };
-export { onAddItemCard };
+export { getItems, deleteItem, onAddItemCard, checkResponse };
