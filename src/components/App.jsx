@@ -47,30 +47,30 @@ function App() {
     console.log(selectedCard);
   };
 
- 
-
   const deleteItemCard = () => {
-      deleteItem(selectedCard._id).then(()=> {
-      deleteCard();
-      closeActiveModal();
-    }).catch((error) => {
-      console.log(error)
-    });
-};
-
+    deleteItem(selectedCard._id)
+      .then(() => {
+        deleteCard();
+        closeActiveModal();
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  };
 
   const onAddItem = (values) => {
     const newItem = { ...values, _id: Date.now().toString() };
-    setClothingItems([newItem, ...clothingItems])
+    
 
     onAddItemCard(newItem)
-    .then(() => {
-      closeActiveModal();
-    }).catch((error) => {
-      console.log(error)
-    });
+      .then(() => {
+        setClothingItems([newItem, ...clothingItems]);
+        closeActiveModal();
+      })
+      .catch((error) => {
+        console.log(error);
+      });
   };
-
 
   const handleToggleSwitchChange = () => {
     if (currentTemperatureUnit === "C") setCurrentTemperatureUnit("F");
@@ -149,4 +149,3 @@ function App() {
 }
 
 export default App;
-
