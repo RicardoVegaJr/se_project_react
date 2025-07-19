@@ -11,19 +11,29 @@
 .header__switch-wrapper{
   display: flex;
   align-items: center;
-  margin-left:500px;
+  margin-left:0;
 
 }
 
 .header__logo {
-  margin-right: 24px;
+  margin-right: 0;
 }
 
 .header__date-and-location {
-  margin: 0;
+  margin-right: 872px;
   line-height: 24px;
   
 }
+
+.header__link_signin {
+margin:0;
+}
+
+.header__link_signup{
+  margin-right: 20px;
+  margin-left: 20px;
+}
+
 .header__add-clothes-btn {
   margin-left: 20px;
   margin-right: 20px;
@@ -54,7 +64,24 @@
     margin-left:100px;
   
   }
+
+  .header__date-and-location {
+  margin-right: 0px;
+  line-height: 24px;
+  
 }
+
+.header__link_signin {
+margin:0;
+}
+
+.header__link_signup{
+  margin-right: 20px;
+  margin-left: 20px;
+}
+}
+
+
 
 @media screen and (max-width: 840px) {
   .header__switch-wrapper{
@@ -64,3 +91,4 @@
   
   }
 }
+

@@ -8,15 +8,18 @@
 }
 
 .card__title-container {
-  background-color: #ffff;
-  border-radius: 4px;
+  display: flex;
   position: absolute;
-  margin: 0;
   top: 15px;
   left: 116px;
+}
+.card__title-container-wrapper{
+  background-color: #ffff;
+  border-radius: 4px;
+  margin:0;
   padding-left: 12px;
   padding-right: 12px;
-  padding-top: 2px;
+  padding-top: 0px;
 }
 
 .card__title {
@@ -39,3 +42,10 @@
   width: 323px;
   height: 326px;
 }
+
+.card__like-icon{
+  margin-left: 10px;
+}
+
+
+

@@ -17,7 +17,8 @@ export const filterweatherData = (data) => {
     f: data.main.temp,
     c: Math.round(((data.main.temp - 32) * 5) / 9),
   };
-  result.type = getWeatherType(result.temp.F);
+
+  result.type = getWeatherType(result.temp.f);
   console.log(result);
   return result;
 };
@@ -25,7 +26,7 @@ export const filterweatherData = (data) => {
 const getWeatherType = (temperature) => {
   if (temperature > 86) {
     return "hot";
-  } else if (temperature >= 66 && temperature < 86) {
+  } else if (temperature >= 66 && temperature <= 86) {
     return "warm";
   } else {
     return "cold";
