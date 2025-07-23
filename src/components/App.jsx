@@ -136,6 +136,13 @@ function App() {
       });
   };
 
+  const handleLogOutClick = () =>{
+    setToken("");
+    setIsLoggedIn(false);
+    setCurrentUser({ name: "", avatar: "", email: "", _id: "" });
+    navigate("/");
+  }
+
   // Edit Profile Logic //
 
   const handleEditClick = () => {
@@ -294,6 +301,7 @@ function App() {
                       onCardLike={handleCardLike}
                       handleEditClick={handleEditClick}
                       currentUser={currentUser}
+                      handleLogOutClick={handleLogOutClick}
                     />
                   </ProtectedRoute>
                 }

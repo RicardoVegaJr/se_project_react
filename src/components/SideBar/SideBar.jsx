@@ -4,7 +4,7 @@ import { CurrentUserContext } from "../../contexts/CurrentUserContext";
 import { useContext } from "react"; // Import useContext
 
 
-function SideBar({handleEditClick}) {
+function SideBar({handleEditClick, handleLogOutClick}) {
 
   const { currentUser} = useContext(CurrentUserContext);
   console.log("Current User Avatar in sidebar is ", currentUser.avatar);
@@ -22,7 +22,7 @@ function SideBar({handleEditClick}) {
           Change profile data
         </button>
         </div>
-        <button className="sidebar-edit " >
+        <button className="sidebar-edit" onClick={handleLogOutClick} >
           Log out
         </button>
       </div>
