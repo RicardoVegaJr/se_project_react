@@ -24,6 +24,8 @@ import { getUserInfo } from "../utils/api";
 import { CurrentUserContext } from "../contexts/CurrentUserContext.js";
 import { register, authorize } from "../utils/auth.js";
 import { addCardLike, removeCardLike } from "../utils/api";
+import EditProfile from "./ChangeProfileData/EditProfileModal.jsx";
+import { editProfile } from "../utils/api";
 
 function App() {
   const [weatherData, setWeatherData] = useState({
@@ -39,6 +41,7 @@ function App() {
   const [userData, setUserData] = useState({ name: "", email: "" });
   const [currentUser, setCurrentUser] = useState({
     name: "",
+    avatar: "",
     email: "",
     _id: "",
   });
@@ -53,14 +56,14 @@ function App() {
 
     if (!jwt) {
       setIsLoggedIn(false);
-      setCurrentUser({ name: "", email: "", _id: "" });
+      setCurrentUser({ name: "", avatar:"", email: "", _id: "" });
       return;
     }
 
     getUserInfo(jwt)
       .then((data) => {
         setIsLoggedIn(true);
-        setCurrentUser({ name: data.name, email: data.email, _id: data._id });
+        setCurrentUser({ name: data.name, avatar:data.avatar, email: data.email, _id: data._id });
         console.log(data);
       })
       .catch((err) => {
@@ -84,11 +87,13 @@ function App() {
       expectedModal = "signup";
     } else if (location.pathname === "/signin") {
       expectedModal = "signin";
+    }  else if (activeModal === "edit-profile") {
+      expectedModal = "edit-profile";
     } else if (activeModal === "add-garment") {
       expectedModal = "add-garment";
     } else if (activeModal === "preview") {
       expectedModal = "preview";
-    }
+    } 
     if (activeModal !== expectedModal) {
       console.log(
         `Updating activeModal from '${activeModal}' to '${expectedModal}'`
@@ -130,6 +135,29 @@ function App() {
         console.error("Error during login authorization:", err);
       });
   };
+
+  // Edit Profile Logic //
+
+  const handleEditClick = () => {
+    setActiveModal("edit-profile");
+  };
+
+  const handleEditProfile = ({name, avatar}) => {
+    const token = getToken(); // Get the current token
+    if (!token) {
+      console.error("No token found for editing profile.");
+      return Promise.reject("No token found.");
+    }
+    editProfile(name, avatar, token)
+      .then((updatedUser) => {
+        setCurrentUser(updatedUser);
+        closeActiveModal();
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  };
+
 
   // Card Logic //
 
@@ -240,7 +268,7 @@ function App() {
           value={{ currentTemperatureUnit, handleToggleSwitchChange }}
         >
           <div className="page__content">
-            <Header handleAddClick={handleAddClick} weatherData={weatherData} />
+            <Header handleAddClick={handleAddClick} weatherData={weatherData}/>
             <Routes>
               <Route
                 path="/"
@@ -264,6 +292,8 @@ function App() {
                       clothingItems={clothingItems}
                       handleCardClick={handleCardClick}
                       onCardLike={handleCardLike}
+                      handleEditClick={handleEditClick}
+                      currentUser={currentUser}
                     />
                   </ProtectedRoute>
                 }
@@ -299,6 +329,14 @@ function App() {
               onClose={closeActiveModal}
               isOpen={activeModal === "preview"}
               deleteItemCard={deleteItemCard}
+              currentUser={currentUser}
+            />
+          )}
+          {activeModal === "edit-profile" && (
+            <EditProfile
+              handleEditProfile={handleEditProfile}
+              closeActiveModal={closeActiveModal}
+              isOpen={activeModal === "edit-profile"}
               currentUser={currentUser}
             />
           )}

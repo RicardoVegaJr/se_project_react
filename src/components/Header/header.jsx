@@ -8,7 +8,8 @@ import { CurrentUserContext } from "../../contexts/CurrentUserContext"; // Impor
 
 function Header({ handleAddClick, weatherData }) {
   // Use useContext to get currentUser and isLoggedIn from CurrentUserContext
-  const { currentUser, isLoggedIn } = useContext(CurrentUserContext);
+  const {  currentUser, isLoggedIn } = useContext(CurrentUserContext);
+    console.log("Current User Avatar in header is ", currentUser);
 
   console.log("Header weatherData:", weatherData);
   console.log("Header currentUser:", currentUser);

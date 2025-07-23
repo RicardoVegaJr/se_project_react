@@ -22,7 +22,7 @@
     border-radius: 20px;
     display: flex;
     width: 496px;
-    height: 436px;
+    height: auto;
     padding-left: 28px;
     padding-right: 28px;
     padding-bottom: 36px;
@@ -98,3 +98,4 @@
     margin-bottom: 0;
     background-color: #0000004d;
   }
+

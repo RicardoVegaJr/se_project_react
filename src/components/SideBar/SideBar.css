@@ -1,3 +1,28 @@
+.sidebar-wrapper {
+    font-family: Cabinet Grotesk;
+    font-weight: 700;
+    font-style: Bold;
+    font-size: 20px;
+    line-height: 100%;
+    border: none;
+     
+}
+
+.sidebar-edit{
+    text-decoration: none;
+    margin-top: 24px;
+    margin-bottom: 0;
+    margin-left: 0;
+    margin-right: auto;
+    color: black;        
+    background: none;    
+    border: none;             
+    padding: 0;            
+    cursor: pointer;          
+    font-weight: 700;  
+}
+
+
 .sidebar{
     display: flex;
     width: 229px;
@@ -5,19 +30,27 @@
     margin: 0;
     padding: 0;
     margin-right:116px;
+    
+}
+
+.sidebar-edit-profile{
+    margin-top: 0;
+    margin-bottom: 8px;
 }
 
 .sidebar__avatar{
-    width: 56px;
-    height: 56px;
+    max-width: 56px;
+    max-height: 56px;
     margin:0;
+    border-radius: 50%;
 }
 
 .sidebar__username{
-font-family: Cabinet Grotesk;
-font-size: 20px;
-font-weight: 700;
-line-height: 24.8px;
-text-align: left;
-margin-left: 16px;
+    font-family: Cabinet Grotesk;
+    font-size: 20px;
+    font-weight: 700;
+    line-height: 24.8px;
+    text-align: left;
+    margin-left: 16px;
 }
+

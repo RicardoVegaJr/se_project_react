@@ -1,3 +1,4 @@
+import EditProfile from "../components/ChangeProfileData/EditProfileModal";
 import { checkToken, getToken } from "./token";
 
 const baseUrl = "http://localhost:3001";
@@ -124,4 +125,21 @@ const removeCardLike = (id, token) => {
   });
 }
 
-export { getItems, deleteItem, onAddItemCard, checkResponse, getUserInfo, addCardLike, removeCardLike };
+const editProfile = (name, avatar, token) => {
+  return fetch(`${baseUrl}/users/me`, {
+    method: "PATCH", 
+    headers: {
+      Accept: "application/json",
+      "Content-Type": "application/json",
+      Authorization: `Bearer ${token}`, 
+    },
+    body: JSON.stringify({ 
+      name: name,
+      avatar: avatar,
+    }),
+  }).then((res) => {
+    return res.ok ? res.json() : Promise.reject(`Error: ${res.status}`);
+  });
+};
+
+export { getItems, deleteItem, onAddItemCard, checkResponse, getUserInfo, addCardLike, removeCardLike, editProfile };

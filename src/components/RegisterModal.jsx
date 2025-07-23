@@ -74,7 +74,7 @@ const handleSubmit = (e) => {
           required
         ></input>
 
-        <label className="modal__form-input-title" htmlFor="email">
+        <label className="modal__form-input-title" htmlFor="Url">
           Avatar URL
         </label>
         <input

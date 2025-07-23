@@ -12,7 +12,6 @@
   display: flex;
   align-items: center;
   margin-left:0;
-
 }
 
 .header__logo {
@@ -20,9 +19,8 @@
 }
 
 .header__date-and-location {
-  margin-right: 872px;
+  margin-right: 750px;
   line-height: 24px;
-  
 }
 
 .header__link_signin {
@@ -54,6 +52,13 @@ margin:0;
 }
 .header__username {
   margin: 0;
+}
+
+.header__avatar{
+  max-width: 40px;
+  max-height: 40px;
+  border-radius: 50%;
+
 }
 
 
