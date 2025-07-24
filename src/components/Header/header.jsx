@@ -1,15 +1,14 @@
 import "./header.css";
-import avatar from "../../assets/avatar.svg"; // Default avatar
+import avatar from "../../assets/avatar.svg";
 import logo from "../../assets/logo.svg";
 import ToggleSwitch from "../ToggleSwitch/ToggleSwitch";
 import { Link } from "react-router-dom";
-import { useContext } from "react"; // Import useContext
-import { CurrentUserContext } from "../../contexts/CurrentUserContext"; // Import CurrentUserContext
+import { useContext } from "react";
+import { CurrentUserContext } from "../../contexts/CurrentUserContext";
 
 function Header({ handleAddClick, weatherData }) {
-  // Use useContext to get currentUser and isLoggedIn from CurrentUserContext
-  const {  currentUser, isLoggedIn } = useContext(CurrentUserContext);
-    console.log("Current User Avatar in header is ", currentUser);
+  const { currentUser, isLoggedIn } = useContext(CurrentUserContext);
+  console.log("Current User Avatar in header is ", currentUser);
 
   console.log("Header weatherData:", weatherData);
   console.log("Header currentUser:", currentUser);
@@ -30,7 +29,6 @@ function Header({ handleAddClick, weatherData }) {
       </p>
       <div className="header__switch-wrapper">
         <ToggleSwitch />
-        {/* Conditionally render + Add Clothes button based on isLoggedIn */}
         {isLoggedIn && (
           <button
             onClick={handleAddClick}
@@ -41,15 +39,12 @@ function Header({ handleAddClick, weatherData }) {
           </button>
         )}
       </div>
-      {/* Conditionally render user info/profile link or signin/signup links */}
       {isLoggedIn ? (
         <Link className="header__link" to="/profile">
           <div className="header_user-container">
-            {/* Display current user's name */}
             <p className="header__username">{currentUser.name}</p>
-            {/* Display current user's avatar if available, otherwise default */}
             <img
-              src={currentUser.avatar || avatar} // Use currentUser.avatar if it exists, otherwise default
+              src={currentUser.avatar || avatar}
               alt={currentUser.name || "User avatar"}
               className="header__avatar"
             />

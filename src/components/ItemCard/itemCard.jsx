@@ -21,7 +21,7 @@ function ItemCard({ item, onCardClick, onCardLike, currentUser }) {
     isCardLiked ? "card__like-icon_liked" : ""
   }`;
 
-const currentLikeIcon = isCardLiked ? LikeButtonLiked : LikeButtonUnliked;
+  const currentLikeIcon = isCardLiked ? LikeButtonLiked : LikeButtonUnliked;
 
   return (
     <div className="card__container">
@@ -30,11 +30,11 @@ const currentLikeIcon = isCardLiked ? LikeButtonLiked : LikeButtonUnliked;
           <h2 className="card__title">{item.name}</h2>
         </div>
         <img
-  src={currentLikeIcon}
-  alt={isCardLiked ? "Liked button" : "Like button"} 
-  className="card__like-icon"
-  onClick={handleLike}
-/>
+          src={currentLikeIcon}
+          alt={isCardLiked ? "Liked button" : "Like button"}
+          className="card__like-icon"
+          onClick={handleLike}
+        />
       </div>
       <img
         className="card__image"

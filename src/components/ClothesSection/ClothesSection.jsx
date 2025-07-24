@@ -3,9 +3,13 @@ import "./ClothesSection.css";
 import { useContext } from "react"; // Import useContext
 import { CurrentUserContext } from "../../contexts/CurrentUserContext";
 
-function ClothesSection({ handleCardClick, clothingItems, handleAddClick, onCardLike}) {
-
-const { currentUser, isLoggedIn } = useContext(CurrentUserContext);
+function ClothesSection({
+  handleCardClick,
+  clothingItems,
+  handleAddClick,
+  onCardLike,
+}) {
+  const { currentUser, isLoggedIn } = useContext(CurrentUserContext);
 
   return (
     <div className="clothes-section">
@@ -20,19 +24,19 @@ const { currentUser, isLoggedIn } = useContext(CurrentUserContext);
         </button>
       </div>
       {isLoggedIn && (
-      <ul className="clothes-section__cards">
-        {clothingItems.map((item) => {
-          return (
-            <ItemCard
-              key={item._id}
-              item={item}
-              onCardClick={handleCardClick}
-              onCardLike={onCardLike}
-              currentUser={currentUser}
-            />
-          );
-        })}
-      </ul>
+        <ul className="clothes-section__cards">
+          {clothingItems.map((item) => {
+            return (
+              <ItemCard
+                key={item._id}
+                item={item}
+                onCardClick={handleCardClick}
+                onCardLike={onCardLike}
+                currentUser={currentUser}
+              />
+            );
+          })}
+        </ul>
       )}
     </div>
   );

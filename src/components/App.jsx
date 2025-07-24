@@ -1,12 +1,11 @@
 import { useEffect, useState } from "react";
 import { getToken, setToken } from "../utils/token.js";
-import { Routes, Route, Navigate, useNavigate } from "react-router-dom";
+import { Routes, Route, useNavigate } from "react-router-dom";
 import "./App.css";
 import { coordinates, APIkey } from "../utils/constants";
 import Header from "./Header/header";
 import Main from "./Main/main";
 import Footer from "./Footer/footer";
-import ModalWithForm from "./ModalWithForm/ModalWithForm";
 import ItemModal from "./ItemModal/ItemModal";
 import { getWeather } from "../utils/weatherApi";
 import { filterweatherData } from "../utils/weatherApi";
@@ -38,7 +37,7 @@ function App() {
   const [currentTemperatureUnit, setCurrentTemperatureUnit] = useState("F");
   const [clothingItems, setClothingItems] = useState([]);
 
-  const [userData, setUserData] = useState({ name: "", email: "" });
+
   const [currentUser, setCurrentUser] = useState({
     name: "",
     avatar: "",
@@ -46,7 +45,7 @@ function App() {
     _id: "",
   });
   const [isLoggedIn, setIsLoggedIn] = useState(false);
-  const navigate = useNavigate(); // Initialize useNavigate
+  const navigate = useNavigate();
   const location = useLocation();
 
   //Log in and auth Logic //
@@ -56,14 +55,19 @@ function App() {
 
     if (!jwt) {
       setIsLoggedIn(false);
-      setCurrentUser({ name: "", avatar:"", email: "", _id: "" });
+      setCurrentUser({ name: "", avatar: "", email: "", _id: "" });
       return;
     }
 
     getUserInfo(jwt)
       .then((data) => {
         setIsLoggedIn(true);
-        setCurrentUser({ name: data.name, avatar:data.avatar, email: data.email, _id: data._id });
+        setCurrentUser({
+          name: data.name,
+          avatar: data.avatar,
+          email: data.email,
+          _id: data._id,
+        });
         console.log(data);
       })
       .catch((err) => {
@@ -87,13 +91,13 @@ function App() {
       expectedModal = "signup";
     } else if (location.pathname === "/signin") {
       expectedModal = "signin";
-    }  else if (activeModal === "edit-profile") {
+    } else if (activeModal === "edit-profile") {
       expectedModal = "edit-profile";
     } else if (activeModal === "add-garment") {
       expectedModal = "add-garment";
     } else if (activeModal === "preview") {
       expectedModal = "preview";
-    } 
+    }
     if (activeModal !== expectedModal) {
       console.log(
         `Updating activeModal from '${activeModal}' to '${expectedModal}'`
@@ -122,7 +126,10 @@ function App() {
           setToken(token);
           console.log("Authorization successful, token set:", token);
           getUserInfo(token);
+          setIsLoggedIn(true);
+          setCurrentUser(data);
           closeActiveModal();
+          navigate("/profile");
         } else {
           console.error(
             "Login failed: No token received from authorization.",
@@ -136,12 +143,12 @@ function App() {
       });
   };
 
-  const handleLogOutClick = () =>{
+  const handleLogOutClick = () => {
     setToken("");
     setIsLoggedIn(false);
     setCurrentUser({ name: "", avatar: "", email: "", _id: "" });
     navigate("/");
-  }
+  };
 
   // Edit Profile Logic //
 
@@ -149,8 +156,8 @@ function App() {
     setActiveModal("edit-profile");
   };
 
-  const handleEditProfile = ({name, avatar}) => {
-    const token = getToken(); // Get the current token
+  const handleEditProfile = ({ name, avatar }) => {
+    const token = getToken();
     if (!token) {
       console.error("No token found for editing profile.");
       return Promise.reject("No token found.");
@@ -164,7 +171,6 @@ function App() {
         console.log(error);
       });
   };
-
 
   // Card Logic //
 
@@ -224,14 +230,7 @@ function App() {
         console.log(filteredData);
         setWeatherData(filteredData);
       })
-      .catch(console.error)
-      // .finally(() => {
-      //   setWeatherData({
-      //     type: "warm",
-      //     temp: { F: 80, C: 20 },
-      //     city: "Some city",
-      //   });
-      // });
+      .catch(console.error);
   }, []);
 
   useEffect(() => {
@@ -244,12 +243,11 @@ function App() {
 
   console.log(currentTemperatureUnit);
 
-
   const handleCardLike = ({ id, isLiked }) => {
     const token = getToken();
     if (!token) {
-        console.error("App.js - No token found for liking/unliking card.");
-        return;
+      console.error("App.js - No token found for liking/unliking card.");
+      return;
     }
     !isLiked
       ? addCardLike(id, token)
@@ -275,7 +273,7 @@ function App() {
           value={{ currentTemperatureUnit, handleToggleSwitchChange }}
         >
           <div className="page__content">
-            <Header handleAddClick={handleAddClick} weatherData={weatherData}/>
+            <Header handleAddClick={handleAddClick} weatherData={weatherData} />
             <Routes>
               <Route
                 path="/"

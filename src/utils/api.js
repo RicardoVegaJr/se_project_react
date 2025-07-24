@@ -1,5 +1,4 @@
-import EditProfile from "../components/ChangeProfileData/EditProfileModal";
-import { checkToken, getToken } from "./token";
+import { checkToken } from "./token";
 
 const baseUrl = "http://localhost:3001";
 
@@ -7,33 +6,30 @@ function getItems() {
   return fetch(`${baseUrl}/items`).then((res) => checkResponse(res));
 }
 
-// function checkResponse(res) {
-//   if (res.ok) {
-//     return res.json();
-//   } else {
-//     return Promise.reject(`Error: ${res.status}`);
-//   }
-// }
-
 function checkResponse(res) {
   console.log("api.js - checkResponse: Received Response Status:", res.status);
   if (res.ok) {
     if (res.status === 204) {
-      console.warn("api.js - Received 204 No Content. For like/unlike, backend should return updated item (200 OK). Returning empty object to prevent JSON parsing error, but this likely indicates a backend issue.");
-      return {}; // Returning empty object for 204 to prevent JSON parsing error
+      console.warn(
+        "api.js - Received 204 No Content. For like/unlike, backend should return updated item (200 OK). Returning empty object to prevent JSON parsing error, but this likely indicates a backend issue."
+      );
+      return {}; 
     }
-    return res.json().then(json => {
+    return res.json().then((json) => {
       console.log("api.js - checkResponse: Parsed JSON response:", json);
       return json;
     });
   } else {
-    return res.json()
-      .then(err => {
+    return res
+      .json()
+      .then((err) => {
         console.error("api.js - checkResponse: Error response JSON:", err);
         return Promise.reject(err);
       })
       .catch(() => {
-        console.error(`api.js - checkResponse: Error: ${res.status} and no JSON body.`);
+        console.error(
+          `api.js - checkResponse: Error: ${res.status} and no JSON body.`
+        );
         return Promise.reject(new Error(`Error: ${res.status}`));
       });
   }
@@ -42,9 +38,9 @@ function checkResponse(res) {
 const deleteItem = (id) => {
   let jwt;
 
-  try{
+  try {
     jwt = checkToken();
-  } catch (error){
+  } catch (error) {
     console.error("Authentication error for deleteItem:", error.message);
     return Promise.reject(error);
   }
@@ -53,20 +49,19 @@ const deleteItem = (id) => {
     method: "DELETE",
     headers: {
       "Content-Type": "application/json",
-      "Authorization": `Bearer ${jwt}`,
+      Authorization: `Bearer ${jwt}`,
     },
-  })
-    .then((res) => {
-      checkResponse(res);
-    })
+  }).then((res) => {
+    checkResponse(res);
+  });
 };
 
 const onAddItemCard = (newItem) => {
   let jwt;
 
-  try{
+  try {
     jwt = checkToken();
-  } catch (error){
+  } catch (error) {
     console.error("Authentication error for addItem:", error.message);
     return Promise.reject(error);
   }
@@ -74,30 +69,25 @@ const onAddItemCard = (newItem) => {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
-      "Authorization": `Bearer ${jwt}`,
+      Authorization: `Bearer ${jwt}`,
     },
     body: JSON.stringify(newItem),
-  })
-    .then((res) => checkResponse(res))
+  }).then((res) => checkResponse(res));
 };
 
 
-// getContent accepts the token as an argument.
 const getUserInfo = (token) => {
-  // Send a GET request to /users/me
   return fetch(`${baseUrl}/users/me`, {
     method: "GET",
     headers: {
       Accept: "application/json",
       "Content-Type": "application/json",
-      // Specify an authorization header with an appropriately
-      // formatted value.
       Authorization: `Bearer ${token}`,
     },
   }).then((res) => {
     return res.ok ? res.json() : Promise.reject(`Error: ${res.status}`);
   });
-}
+};
 
 const addCardLike = (id, token) => {
   return fetch(`${baseUrl}/items/${id}/likes`, {
@@ -110,7 +100,7 @@ const addCardLike = (id, token) => {
   }).then((res) => {
     return res.ok ? res.json() : Promise.reject(`Error: ${res.status}`);
   });
-}
+};
 
 const removeCardLike = (id, token) => {
   return fetch(`${baseUrl}/items/${id}/likes`, {
@@ -123,17 +113,17 @@ const removeCardLike = (id, token) => {
   }).then((res) => {
     return res.ok ? res.json() : Promise.reject(`Error: ${res.status}`);
   });
-}
+};
 
 const editProfile = (name, avatar, token) => {
   return fetch(`${baseUrl}/users/me`, {
-    method: "PATCH", 
+    method: "PATCH",
     headers: {
       Accept: "application/json",
       "Content-Type": "application/json",
-      Authorization: `Bearer ${token}`, 
+      Authorization: `Bearer ${token}`,
     },
-    body: JSON.stringify({ 
+    body: JSON.stringify({
       name: name,
       avatar: avatar,
     }),
@@ -142,4 +132,13 @@ const editProfile = (name, avatar, token) => {
   });
 };
 
-export { getItems, deleteItem, onAddItemCard, checkResponse, getUserInfo, addCardLike, removeCardLike, editProfile };
+export {
+  getItems,
+  deleteItem,
+  onAddItemCard,
+  checkResponse,
+  getUserInfo,
+  addCardLike,
+  removeCardLike,
+  editProfile,
+};

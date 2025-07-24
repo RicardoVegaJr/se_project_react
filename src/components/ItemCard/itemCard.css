@@ -13,10 +13,10 @@
   top: 15px;
   left: 116px;
 }
-.card__title-container-wrapper{
+.card__title-container-wrapper {
   background-color: #ffff;
   border-radius: 4px;
-  margin:0;
+  margin: 0;
   padding-left: 12px;
   padding-right: 12px;
   padding-top: 0px;
@@ -43,9 +43,6 @@
   height: 326px;
 }
 
-.card__like-icon{
+.card__like-icon {
   margin-left: 10px;
 }
-
-
-

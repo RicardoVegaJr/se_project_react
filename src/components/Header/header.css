@@ -6,12 +6,11 @@
   font-family: CabinetGrotesk-Regular;
   font-weight: 700;
   font-size: 20px;
-  
 }
-.header__switch-wrapper{
+.header__switch-wrapper {
   display: flex;
   align-items: center;
-  margin-left:0;
+  margin-left: 0;
 }
 
 .header__logo {
@@ -24,10 +23,10 @@
 }
 
 .header__link_signin {
-margin:0;
+  margin: 0;
 }
 
-.header__link_signup{
+.header__link_signup {
   margin-right: 20px;
   margin-left: 20px;
 }
@@ -41,7 +40,7 @@ margin:0;
   border: none;
 }
 
-.header__link{
+.header__link {
   text-decoration: none;
   color: black;
 }
@@ -54,46 +53,38 @@ margin:0;
   margin: 0;
 }
 
-.header__avatar{
+.header__avatar {
   max-width: 40px;
   max-height: 40px;
   border-radius: 50%;
-
 }
 
-
 @media screen and (max-width: 1150px) {
-  .header__switch-wrapper{
+  .header__switch-wrapper {
     display: flex;
     align-items: center;
-    margin-left:100px;
-  
+    margin-left: 100px;
   }
 
   .header__date-and-location {
-  margin-right: 0px;
-  line-height: 24px;
-  
-}
+    margin-right: 0px;
+    line-height: 24px;
+  }
 
-.header__link_signin {
-margin:0;
-}
+  .header__link_signin {
+    margin: 0;
+  }
 
-.header__link_signup{
-  margin-right: 20px;
-  margin-left: 20px;
-}
-}
-
-
-
-@media screen and (max-width: 840px) {
-  .header__switch-wrapper{
-    display: flex;
-    align-items: center;
-    margin-left:30px;
-  
+  .header__link_signup {
+    margin-right: 20px;
+    margin-left: 20px;
   }
 }
 
+@media screen and (max-width: 840px) {
+  .header__switch-wrapper {
+    display: flex;
+    align-items: center;
+    margin-left: 30px;
+  }
+}

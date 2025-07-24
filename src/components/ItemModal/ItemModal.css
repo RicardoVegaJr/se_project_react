@@ -1,85 +1,84 @@
 .modal {
-    position: fixed;
-    top: 0;
-    right: 0;
-    left: 0;
-    bottom: 0;
-    z-index: 999;
-    justify-content: center;
-    align-items: center;
-    background-color: rgba(0, 0, 0, 0.5);
-    display: flex;
-    margin: 0;
-    padding: 0;
-  }
-  .modal_opened {
-    visibility: visible;
-  }
-  
-   .modal__item-container {
-    background-color: #ffffff;
-    border-radius: 20px;
-    display: flex;
-    flex-direction: column;
-    width: 498px;
-    height: 610px;
-    position: relative;
-    margin: 0;
-    padding:0;
-    overflow: hidden;
-  } 
-  
-  .modal__close {
-    width: 16px;
-    height: 16px;
-    position: absolute;
-    top: 22px;
-    right: 30px;
-    background-image: url(../../assets/modalClose.svg);
-    border: none;
-    cursor: pointer;
-  } 
+  position: fixed;
+  top: 0;
+  right: 0;
+  left: 0;
+  bottom: 0;
+  z-index: 999;
+  justify-content: center;
+  align-items: center;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  margin: 0;
+  padding: 0;
+}
+.modal_opened {
+  visibility: visible;
+}
 
-  .modal__image{
-    width: 498px; 
-    height: 498px;
-  }  
-  
- .modal__footer{
-    margin-left: 32px;
-    margin-bottom: 68px;
- } 
+.modal__item-container {
+  background-color: #ffffff;
+  border-radius: 20px;
+  display: flex;
+  flex-direction: column;
+  width: 498px;
+  height: 610px;
+  position: relative;
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+}
 
-  .modal__caption{
-    font-family: CabinetGrotesk-Regular;
-    font-size: 20px;
-    font-weight: 700;
-    line-height: 24px;
-    margin-bottom: 12px;
- } 
+.modal__close {
+  width: 16px;
+  height: 16px;
+  position: absolute;
+  top: 22px;
+  right: 30px;
+  background-image: url(../../assets/modalClose.svg);
+  border: none;
+  cursor: pointer;
+}
 
+.modal__image {
+  width: 498px;
+  height: 498px;
+}
 
- .modal__weather{
-    font-family: CabinetGrotesk-Regular;
-    font-size: 20px;
-    font-weight: 700;
-    line-height: 24px;
- } 
+.modal__footer {
+  margin-left: 32px;
+  margin-bottom: 68px;
+}
 
- .modal__delete{
+.modal__caption {
   font-family: CabinetGrotesk-Regular;
-    font-size: 20px;
-    font-weight: 700;
-    line-height: 24px;
-    position: absolute;
-    top: 518px;
-    right: 32px;
-    color: #FF4D00;
-    background: transparent;
-    border: none;
-    width: 101px;
-    height: 24px;
-    margin:0;
-    padding: 0;
-    cursor: pointer;
- }
+  font-size: 20px;
+  font-weight: 700;
+  line-height: 24px;
+  margin-bottom: 12px;
+}
+
+.modal__weather {
+  font-family: CabinetGrotesk-Regular;
+  font-size: 20px;
+  font-weight: 700;
+  line-height: 24px;
+}
+
+.modal__delete {
+  font-family: CabinetGrotesk-Regular;
+  font-size: 20px;
+  font-weight: 700;
+  line-height: 24px;
+  position: absolute;
+  top: 518px;
+  right: 32px;
+  color: #ff4d00;
+  background: transparent;
+  border: none;
+  width: 101px;
+  height: 24px;
+  margin: 0;
+  padding: 0;
+  cursor: pointer;
+}
