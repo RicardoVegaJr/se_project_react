@@ -6,7 +6,7 @@ import { Link } from "react-router-dom";
 import { useContext } from "react";
 import { CurrentUserContext } from "../../contexts/CurrentUserContext";
 
-function Header({ handleAddClick, weatherData }) {
+function Header({ handleAddClick, weatherData, setActiveModal }) {
   const { currentUser, isLoggedIn } = useContext(CurrentUserContext);
   console.log("Current User Avatar in header is ", currentUser);
 
@@ -52,12 +52,12 @@ function Header({ handleAddClick, weatherData }) {
         </Link>
       ) : (
         <div className="header__auth-links">
-          <Link to="/signup" className="header__link header__link_signup">
+          <button  onClick={() => setActiveModal("signup")} className="header__link header__link_signup">
             Sign Up
-          </Link>
-          <Link to="/signin" className="header__link header__link_signin">
+          </button>
+          <button  onClick={() => setActiveModal("signin")}className="header__link header__link_signin">
             Log In
-          </Link>
+          </button>
         </div>
       )}
     </header>

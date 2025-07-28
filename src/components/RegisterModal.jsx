@@ -1,7 +1,7 @@
 import { useState } from "react";
 import ModalWithForm from "./ModalWithForm/ModalWithForm";
 
-const RegisterModal = ({ handleRegistration, closeActiveModal, isOpen }) => {
+const RegisterModal = ({ handleRegistration, closeActiveModal, isOpen, activeModal }) => {
   const [data, setData] = useState({
     name: "",
     email: "",
@@ -30,6 +30,7 @@ const RegisterModal = ({ handleRegistration, closeActiveModal, isOpen }) => {
       onClose={closeActiveModal}
       isOpen={isOpen}
       onSubmit={handleSubmit}
+      activeModal={activeModal}
     >
       <label className="modal__form-input-title" htmlFor="email">
         Email

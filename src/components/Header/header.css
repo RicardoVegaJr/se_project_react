@@ -41,8 +41,14 @@
 }
 
 .header__link {
-  text-decoration: none;
   color: black;
+  border:none;
+  opacity: 1;
+  font-weight: 700;
+  font-style: Bold;
+  font-size: 20px;
+  cursor: pointer;
+  text-decoration: none;
 }
 .header_user-container {
   display: flex;

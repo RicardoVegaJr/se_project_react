@@ -1,6 +1,6 @@
 import ItemCard from "../ItemCard/itemCard";
 import "./ClothesSection.css";
-import { useContext } from "react"; // Import useContext
+import { useContext } from "react"; 
 import { CurrentUserContext } from "../../contexts/CurrentUserContext";
 
 function ClothesSection({
@@ -32,7 +32,6 @@ function ClothesSection({
                 item={item}
                 onCardClick={handleCardClick}
                 onCardLike={onCardLike}
-                currentUser={currentUser}
               />
             );
           })}

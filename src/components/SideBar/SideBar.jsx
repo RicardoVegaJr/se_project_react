@@ -15,7 +15,7 @@ function SideBar({ handleEditClick, handleLogOutClick }) {
           src={currentUser.avatar || avatar}
           alt="default avatar"
         />
-        <p className="sidebar__username">Terrence Tegegne</p>
+        <p className="sidebar__username">{currentUser.name}</p>
       </div>
       <div className="sidebar-edit">
         <div className="sidebar-edit-profile ">

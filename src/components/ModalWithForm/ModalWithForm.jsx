@@ -7,6 +7,7 @@ function ModalWithForm({
   onClose,
   isOpen,
   onSubmit,
+  activeModal
 }) {
   return (
     <div className={`modal ${isOpen ? "modal_opened" : ""}`}>
@@ -15,9 +16,17 @@ function ModalWithForm({
         <form onSubmit={onSubmit} action="" className="modal__form">
           <h1 className="modal__form-title">{title}</h1>
           {children}
+          <div>
           <button type="submit" className="modal__form_submit-button">
             {buttonText}
           </button>
+          {activeModal === "signup" && (
+          <button className="modal__form_login"> or login</button>
+          )}
+          {activeModal === "signin" && (
+          <button className="modal__form_login"> or register</button>
+          )}
+          </div>
         </form>
       </div>
     </div>

@@ -13,7 +13,7 @@ function checkResponse(res) {
       console.warn(
         "api.js - Received 204 No Content. For like/unlike, backend should return updated item (200 OK). Returning empty object to prevent JSON parsing error, but this likely indicates a backend issue."
       );
-      return {}; 
+      return {};
     }
     return res.json().then((json) => {
       console.log("api.js - checkResponse: Parsed JSON response:", json);
@@ -75,7 +75,6 @@ const onAddItemCard = (newItem) => {
   }).then((res) => checkResponse(res));
 };
 
-
 const getUserInfo = (token) => {
   return fetch(`${baseUrl}/users/me`, {
     method: "GET",
@@ -97,9 +96,7 @@ const addCardLike = (id, token) => {
       "Content-Type": "application/json",
       Authorization: `Bearer ${token}`,
     },
-  }).then((res) => {
-    return res.ok ? res.json() : Promise.reject(`Error: ${res.status}`);
-  });
+  }).then((res) => checkResponse(res));
 };
 
 const removeCardLike = (id, token) => {
@@ -110,9 +107,7 @@ const removeCardLike = (id, token) => {
       "Content-Type": "application/json",
       Authorization: `Bearer ${token}`,
     },
-  }).then((res) => {
-    return res.ok ? res.json() : Promise.reject(`Error: ${res.status}`);
-  });
+  }).then((res) => checkResponse(res));
 };
 
 const editProfile = (name, avatar, token) => {
@@ -127,9 +122,7 @@ const editProfile = (name, avatar, token) => {
       name: name,
       avatar: avatar,
     }),
-  }).then((res) => {
-    return res.ok ? res.json() : Promise.reject(`Error: ${res.status}`);
-  });
+  }).then((res) => checkResponse(res));
 };
 
 export {

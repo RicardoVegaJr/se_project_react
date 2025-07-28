@@ -1,8 +1,13 @@
 import "./itemCard.css";
 import LikeButtonLiked from "../../assets/Icons/LikeButtonLiked.svg";
 import LikeButtonUnliked from "../../assets/Icons/LikeButtonUnliked.svg";
+import { useContext } from "react"; 
+import { CurrentUserContext } from "../../contexts/CurrentUserContext";
 
-function ItemCard({ item, onCardClick, onCardLike, currentUser }) {
+function ItemCard({ item, onCardClick, onCardLike}) {
+
+const { currentUser, isLoggedIn } = useContext(CurrentUserContext);
+
   const handleLike = () => {
     const isLiked =
       item.likes &&
@@ -29,12 +34,14 @@ function ItemCard({ item, onCardClick, onCardLike, currentUser }) {
         <div className="card__title-container-wrapper">
           <h2 className="card__title">{item.name}</h2>
         </div>
+        {isLoggedIn && (
         <img
           src={currentLikeIcon}
           alt={isCardLiked ? "Liked button" : "Like button"}
           className="card__like-icon"
           onClick={handleLike}
         />
+        )}
       </div>
       <img
         className="card__image"

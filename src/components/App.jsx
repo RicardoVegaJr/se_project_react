@@ -37,7 +37,6 @@ function App() {
   const [currentTemperatureUnit, setCurrentTemperatureUnit] = useState("F");
   const [clothingItems, setClothingItems] = useState([]);
 
-
   const [currentUser, setCurrentUser] = useState({
     name: "",
     avatar: "",
@@ -78,39 +77,38 @@ function App() {
       });
   }, []);
 
-  useEffect(() => {
-    console.log(
-      "Modal useEffect: Pathname:",
-      location.pathname,
-      "ActiveModal:",
-      activeModal
-    );
+  // useEffect(() => {
+  //   console.log(
+  //     "Modal useEffect: Pathname:",
+  //     location.pathname,
+  //     "ActiveModal:",
+  //     activeModal
+  //   );
 
-    let expectedModal = "";
-    if (location.pathname === "/signup") {
-      expectedModal = "signup";
-    } else if (location.pathname === "/signin") {
-      expectedModal = "signin";
-    } else if (activeModal === "edit-profile") {
-      expectedModal = "edit-profile";
-    } else if (activeModal === "add-garment") {
-      expectedModal = "add-garment";
-    } else if (activeModal === "preview") {
-      expectedModal = "preview";
-    }
-    if (activeModal !== expectedModal) {
-      console.log(
-        `Updating activeModal from '${activeModal}' to '${expectedModal}'`
-      );
-      setActiveModal(expectedModal);
-    }
-  }, [location.pathname, activeModal]);
+  //   let expectedModal = "";
+  //   if (location.pathname === "/signup") {
+  //     expectedModal = "signup";
+  //   } else if (location.pathname === "/signin") {
+  //     expectedModal = "signin";
+  //   }
+  //   if (!activeModal && expectedModal) {
+  //     console.log(`Opening modal based on route: ${expectedModal}`);
+  //     setActiveModal(expectedModal);
+  //   }
+  //   if (
+  //     location.pathname !== "/signup" &&
+  //     location.pathname !== "/signin" &&
+  //     (activeModal === "signup" || activeModal === "signin")
+  //   ) {
+  //     setActiveModal("");
+  //   }
+  // }, [location.pathname]);
 
   const handleRegistration = ({ name, avatar, email, password }) =>
     register(name, avatar, email, password)
       .then(() => {
         closeActiveModal();
-        navigate("/signin");
+        setActiveModal("signin");
       })
       .catch(console.error);
 
@@ -121,22 +119,28 @@ function App() {
     }
     authorize(email, password)
       .then((data) => {
-        const token = data.token || data.jwt;
-        if (token) {
-          setToken(token);
-          console.log("Authorization successful, token set:", token);
-          getUserInfo(token);
-          setIsLoggedIn(true);
-          setCurrentUser(data);
-          closeActiveModal();
-          navigate("/profile");
-        } else {
+        if (!data || (!data.token && !data.jwt)) {
           console.error(
-            "Login failed: No token received from authorization.",
+            "Login failed: No token received from authorization",
             data
           );
           return Promise.reject("No token received from authorization");
         }
+        const token = data.token || data.jwt;
+        setToken(token);
+        console.log("Authorization successful, token set:", token);
+        return getUserInfo(token);
+      })
+      .then((userData) => {
+        setIsLoggedIn(true);
+        setCurrentUser({
+          name: userData.name,
+          avatar: userData.avatar,
+          email: userData.email,
+          _id: userData._id,
+        });
+        closeActiveModal();
+        navigate("/profile");
       })
       .catch((err) => {
         console.error("Error during login authorization:", err);
@@ -206,11 +210,9 @@ function App() {
   };
 
   const onAddItem = (values) => {
-    const newItem = { ...values, _id: Date.now().toString() };
-
-    onAddItemCard(newItem)
-      .then(() => {
-        setClothingItems([newItem, ...clothingItems]);
+    onAddItemCard(values)
+      .then((savedItem) => {
+        setClothingItems([savedItem, ...clothingItems]);
         closeActiveModal();
       })
       .catch((error) => {
@@ -273,7 +275,11 @@ function App() {
           value={{ currentTemperatureUnit, handleToggleSwitchChange }}
         >
           <div className="page__content">
-            <Header handleAddClick={handleAddClick} weatherData={weatherData} />
+            <Header
+              handleAddClick={handleAddClick}
+              weatherData={weatherData}
+              setActiveModal={setActiveModal}
+            />
             <Routes>
               <Route
                 path="/"
@@ -284,7 +290,6 @@ function App() {
                     weatherData={weatherData}
                     handleCardClick={handleCardClick}
                     onCardLike={handleCardLike}
-                    currentUser={currentUser}
                   />
                 }
               />
@@ -319,6 +324,7 @@ function App() {
               handleRegistration={handleRegistration}
               closeActiveModal={closeActiveModal}
               isOpen={activeModal === "signup"}
+              activeModal={activeModal}
             />
           )}
 
@@ -327,6 +333,7 @@ function App() {
               handleLogin={handleLogin}
               closeActiveModal={closeActiveModal}
               isOpen={activeModal === "signin"}
+              activeModal={activeModal}
             />
           )}
           {activeModal === "preview" && (
@@ -343,7 +350,6 @@ function App() {
               handleEditProfile={handleEditProfile}
               closeActiveModal={closeActiveModal}
               isOpen={activeModal === "edit-profile"}
-              currentUser={currentUser}
             />
           )}
         </CurrentTemperatureUnitContext.Provider>

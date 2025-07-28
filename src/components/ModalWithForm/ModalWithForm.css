@@ -98,3 +98,15 @@
   margin-bottom: 0;
   background-color: #0000004d;
 }
+
+.modal__form_login{
+font-family: Cabinet Grotesk;
+font-weight: 700;
+font-style: Bold;
+font-size: 16px;
+line-height: 20px;
+letter-spacing: 0%;
+color: #00000080;
+border: none;
+background-color: #ffffff;
+}
