@@ -1,8 +1,6 @@
 import WeatherCard from "../WeatherCard/weatherCard";
 import ItemCard from "../ItemCard/itemCard";
 import "./main.css";
-import { useContext } from "react"; 
-import { CurrentUserContext } from "../../contexts/CurrentUserContext";
 
 function Main({
   currentTemp,
@@ -11,7 +9,7 @@ function Main({
   clothingItems,
   onCardLike,
 }) {
-  const { isLoggedIn } = useContext(CurrentUserContext);
+  
 
   return (
     <main>

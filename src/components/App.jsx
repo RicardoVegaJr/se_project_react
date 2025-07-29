@@ -17,7 +17,6 @@ import { deleteItem } from "../utils/api";
 import { onAddItemCard } from "../utils/api";
 import LoginModal from "../components/login";
 import ProtectedRoute from "./ProtectedRoutes";
-import { useLocation } from "react-router-dom";
 import RegisterModal from "../components/RegisterModal";
 import { getUserInfo } from "../utils/api";
 import { CurrentUserContext } from "../contexts/CurrentUserContext.js";
@@ -45,7 +44,6 @@ function App() {
   });
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const navigate = useNavigate();
-  const location = useLocation();
 
   //Log in and auth Logic //
 
@@ -77,32 +75,6 @@ function App() {
       });
   }, []);
 
-  // useEffect(() => {
-  //   console.log(
-  //     "Modal useEffect: Pathname:",
-  //     location.pathname,
-  //     "ActiveModal:",
-  //     activeModal
-  //   );
-
-  //   let expectedModal = "";
-  //   if (location.pathname === "/signup") {
-  //     expectedModal = "signup";
-  //   } else if (location.pathname === "/signin") {
-  //     expectedModal = "signin";
-  //   }
-  //   if (!activeModal && expectedModal) {
-  //     console.log(`Opening modal based on route: ${expectedModal}`);
-  //     setActiveModal(expectedModal);
-  //   }
-  //   if (
-  //     location.pathname !== "/signup" &&
-  //     location.pathname !== "/signin" &&
-  //     (activeModal === "signup" || activeModal === "signin")
-  //   ) {
-  //     setActiveModal("");
-  //   }
-  // }, [location.pathname]);
 
   const handleRegistration = ({ name, avatar, email, password }) =>
     register(name, avatar, email, password)
@@ -303,7 +275,6 @@ function App() {
                       handleCardClick={handleCardClick}
                       onCardLike={handleCardLike}
                       handleEditClick={handleEditClick}
-                      currentUser={currentUser}
                       handleLogOutClick={handleLogOutClick}
                     />
                   </ProtectedRoute>
@@ -325,6 +296,7 @@ function App() {
               closeActiveModal={closeActiveModal}
               isOpen={activeModal === "signup"}
               activeModal={activeModal}
+              setActiveModal={setActiveModal}
             />
           )}
 
@@ -334,6 +306,7 @@ function App() {
               closeActiveModal={closeActiveModal}
               isOpen={activeModal === "signin"}
               activeModal={activeModal}
+              setActiveModal={setActiveModal}
             />
           )}
           {activeModal === "preview" && (
@@ -342,7 +315,6 @@ function App() {
               onClose={closeActiveModal}
               isOpen={activeModal === "preview"}
               deleteItemCard={deleteItemCard}
-              currentUser={currentUser}
             />
           )}
           {activeModal === "edit-profile" && (

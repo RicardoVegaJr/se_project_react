@@ -9,14 +9,12 @@ function Profile({
   onCardLike,
   handleEditClick,
   handleLogOutClick,
-  currentUser,
 }) {
   return (
     <div className="profile">
       <section className="profile__sidebar">
         <SideBar
           handleEditClick={handleEditClick}
-          currentUser={currentUser}
           handleLogOutClick={handleLogOutClick}
         />
       </section>

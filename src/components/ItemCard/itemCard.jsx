@@ -22,9 +22,6 @@ const { currentUser, isLoggedIn } = useContext(CurrentUserContext);
     currentUser &&
     currentUser._id &&
     item.likes.includes(currentUser._id);
-  const likeIconClassName = `card__like-icon ${
-    isCardLiked ? "card__like-icon_liked" : ""
-  }`;
 
   const currentLikeIcon = isCardLiked ? LikeButtonLiked : LikeButtonUnliked;
 

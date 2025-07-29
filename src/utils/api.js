@@ -83,9 +83,7 @@ const getUserInfo = (token) => {
       "Content-Type": "application/json",
       Authorization: `Bearer ${token}`,
     },
-  }).then((res) => {
-    return res.ok ? res.json() : Promise.reject(`Error: ${res.status}`);
-  });
+  }).then((res) => checkResponse(res));
 };
 
 const addCardLike = (id, token) => {

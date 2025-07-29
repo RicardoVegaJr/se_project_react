@@ -9,7 +9,7 @@ function ClothesSection({
   handleAddClick,
   onCardLike,
 }) {
-  const { currentUser, isLoggedIn } = useContext(CurrentUserContext);
+  const {isLoggedIn} = useContext(CurrentUserContext);
 
   return (
     <div className="clothes-section">
