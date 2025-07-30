@@ -9,8 +9,10 @@ function ClothesSection({
   handleAddClick,
   onCardLike,
 }) {
-  const {isLoggedIn} = useContext(CurrentUserContext);
+  const { isLoggedIn, currentUser } = useContext(CurrentUserContext);
 
+  const userItems = clothingItems.filter(item => item.owner === currentUser._id);
+  
   return (
     <div className="clothes-section">
       <div className="clothes-section__add">
@@ -25,7 +27,7 @@ function ClothesSection({
       </div>
       {isLoggedIn && (
         <ul className="clothes-section__cards">
-          {clothingItems.map((item) => {
+          {userItems.map((item) => {
             return (
               <ItemCard
                 key={item._id}

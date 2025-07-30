@@ -80,7 +80,9 @@ function App() {
     register(name, avatar, email, password)
       .then(() => {
         closeActiveModal();
-        setActiveModal("signin");
+        return authorize(email, password);
+      }).then((data) =>{
+        handleLogin({email, password});
       })
       .catch(console.error);
 
@@ -118,6 +120,7 @@ function App() {
         console.error("Error during login authorization:", err);
       });
   };
+
 
   const handleLogOutClick = () => {
     setToken("");
