@@ -81,7 +81,7 @@ function App() {
       .then(() => {
         closeActiveModal();
         return authorize(email, password);
-      }).then((data) =>{
+      }).then(() =>{
         handleLogin({email, password});
       })
       .catch(console.error);
